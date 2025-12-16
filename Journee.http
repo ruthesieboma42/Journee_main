@@ -1,4 +1,4 @@
-@Journee_HostAddress = https://localhost:7014
+@Journee_HostAddress = https://journee-xzmq.onrender.com
 
 GET {{Journee_HostAddress}}/api/categories
 Accept: application/json
