@@ -45,12 +45,11 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReact", policy =>
     {
-        policy.WithOrigins("http://localhost:5173",
-                "https://journee-xzmq.onrender.com", "https://journeevercel.vercel.app")
+        policy.WithOrigins("http://localhost:5173", "https://journeevercel.vercel.app")
               .AllowAnyHeader()
-              .AllowAnyMethod();
+              .AllowAnyMethod()
+              .AllowCredentials(); // Often required for JWT/Cookies
     });
-});
 
 var app = builder.Build();
 
@@ -77,6 +76,7 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage(); 
 }
 
+app.UseRouting(); 
 app.UseCors("AllowReact");
 app.UseAuthentication();
 app.UseAuthorization();
