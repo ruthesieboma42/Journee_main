@@ -6,8 +6,8 @@ EXPOSE 10000
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["Journee_main/Journee.csproj", "Journee_main/"]
-RUN dotnet restore "Journee_main/Journee.csproj"
+COPY ["./Journee.csproj", "Journee_main/"]
+RUN dotnet restore "./Journee.csproj"
 COPY . .
 WORKDIR "/src/Journee_main"
 RUN dotnet build "Journee.csproj" -c Release -o /app/build
