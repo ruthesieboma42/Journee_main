@@ -45,13 +45,15 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReact", policy =>
     {
-        policy.WithOrigins("http://localhost:5173", "https://journeevercel.vercel.app")
-              .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials(); // Often required for JWT/Cookies
+        policy.WithOrigins(
+            "http://localhost:5173", 
+            "https://journee-xzmq.onrender.com", 
+            "https://journeevercel.vercel.app" // Line 54-56: Ensure commas are here
+        ) // Ensure this parenthesis closes WithOrigins
+        .AllowAnyHeader()
+        .AllowAnyMethod();
     });
-
-}
+});
 
 var app = builder.Build();
 
