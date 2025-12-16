@@ -46,7 +46,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowReact", policy =>
     {
         policy.WithOrigins("http://localhost:5173",
-                "https://journee-xzmq.onrender.com")
+                "https://journee-xzmq.onrender.com", "https://journeevercel.vercel.app")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
