@@ -51,6 +51,8 @@ builder.Services.AddCors(options =>
               .AllowCredentials(); // Often required for JWT/Cookies
     });
 
+}
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
