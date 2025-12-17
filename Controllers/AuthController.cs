@@ -6,6 +6,9 @@ using Journee.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static Journee.DTOs.RegisterRequest;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace Journee.Controllers
 {
@@ -75,5 +78,28 @@ namespace Journee.Controllers
                 UserId = user.Id
             });
         }
+
+        [Authorize]
+        [HttpGet("me")]
+        public async Task<IActionResult> Me()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId == null)
+                return Unauthorized();
+
+            var user = await _context.Users.FindAsync(Guid.Parse(userId));
+
+            if (user == null)
+                return NotFound();
+
+            return Ok(new
+            {
+                email = user.Email,
+                firstname = user.FirstName,
+                lastname = user.LastName
+            });
+        }
+
     }
 }
